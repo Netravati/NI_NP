@@ -8,6 +8,16 @@ answer indications: 0 for No Feedback Loop, 1 if there is Feedback Loop.
 
 $ make all run
 
+# Output 
+Result with given test cases would be as below
+
+Checking with no feedback case..
+Feedback detected is: 0
+Checking with feedback..
+Feedback detected is: 1
+Check with no audio elements
+0
+
 # Question 2: The way AudioEffect is designed is not ideal. What would you change about the design? Please add some comments in the file you will submit for the first question.
 Yes, the control block is thread-safe; but NO, the access to the resource is not thread-safe
 Using shared_ptr for the audioeffect chain is not ideal because there is no explaination with the given senario that the shared ownership is required. As given example explains that the AudioEffect would own the next audioeffect, but shared_ptr used when there more resources might use of an object in its lifetime. 
