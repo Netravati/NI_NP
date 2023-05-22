@@ -126,56 +126,8 @@ void test_with_feedback()
 
 int main(void) 
 {
-  bool bFeedback = 0;
-  int iCase = 1; //Hardcode value for test case to switch
-  
-  std::cout << "Checking with no feedback case.." << std::endl;
-	auto aEffect = std::make_shared<Effect>();
-	auto aEffect1 = std::make_shared<Effect>();
-	auto aEffect2 = std::make_shared<Effect>();
-	auto aEffect3 = std::make_shared<Effect>();
-	
-  for(iCase = 1; iCase <= 3; iCase++)
-  {
-   // std::cout << iCase;
-	  switch(iCase)
-    {
-    case 1:
-      //Test Case without feedback loop
-	    aEffect->next = aEffect1;
-	    aEffect1->next = aEffect2;
-	    aEffect2->next = aEffect3;
-      
-	    bFeedback = detect_feedback(aEffect);
-	    std::cout << "Feedback detected is: " << bFeedback << std::endl; 
-      break;
-     
-    case 2:
-      //Test Case with feedback loop
-      std::cout << "Checking with feedback.." << std::endl;
-	    aEffect->next = aEffect1;
-	    aEffect1->next = aEffect2;
-	    aEffect2->next = aEffect3;
-	    aEffect3->next = aEffect1; // Causes the cyclical reference leads to memory leakage
-	
-      bFeedback = detect_feedback(aEffect);
-	    std::cout << "Feedback detected is: " << bFeedback << std::endl;
-      break;
-      
-    case 3:
-      //checking with no values
-	    std::cout << "Check with no audio elements" << std::endl;
-	    bFeedback = detect_feedback(NULL);//Passing NULL pointer 
-	    std::cout <<  bFeedback << std::endl;
-      break;
-      
-    default:
-        break;
-    }
-  }
-  // delete aEffect.get(); //Explicitly deleting isn't necessary / The references are deleted only after Effect is deleted.
-  
-  return 0;
+    test_with_feedback();
+    test_no_feedback();
 }
 
 /*
